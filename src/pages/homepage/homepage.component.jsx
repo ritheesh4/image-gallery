@@ -1,0 +1,6 @@
+import React from "react";
+import "./homepage.styles.scss";
+
+const HomePage = () => <div className="homepage">hiee</div>;
+
+export default HomePage;
