@@ -25,7 +25,7 @@ export default function Card() {
       spacing={3}
       style={{ width: "95vw", margin: "auto", minHeight: "83.4vh" }}
     >
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         <CardBody className={classes.root}>
           {/* <Grid container direction="row" justify="center" alignItems="center"> */}
           <CardMedia
@@ -35,7 +35,7 @@ export default function Card() {
           />
         </CardBody>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         <CardBody className={classes.root}>
           {/* <Grid container direction="row" justify="center" alignItems="center"> */}
           <CardMedia
@@ -45,7 +45,7 @@ export default function Card() {
           />
         </CardBody>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         <CardBody className={classes.root}>
           {/* <Grid container direction="row" justify="center" alignItems="center"> */}
           <CardMedia
@@ -56,7 +56,7 @@ export default function Card() {
         </CardBody>
       </Grid>
 
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         <CardBody className={classes.root}>
           {/* <Grid container direction="row" justify="center" alignItems="center"> */}
           <CardMedia
@@ -66,7 +66,7 @@ export default function Card() {
           />
         </CardBody>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         <CardBody className={classes.root}>
           {/* <Grid container direction="row" justify="center" alignItems="center"> */}
           <CardMedia
@@ -76,7 +76,38 @@ export default function Card() {
           />
         </CardBody>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={4}>
+        <CardBody className={classes.root}>
+          {/* <Grid container direction="row" justify="center" alignItems="center"> */}
+          <CardMedia
+            className={classes.media}
+            image="https://homepages.cae.wisc.edu/~ece533/images/peppers.png"
+            title="Paella dish"
+          />
+        </CardBody>
+      </Grid>
+
+      <Grid item xs={4}>
+        <CardBody className={classes.root}>
+          {/* <Grid container direction="row" justify="center" alignItems="center"> */}
+          <CardMedia
+            className={classes.media}
+            image="https://homepages.cae.wisc.edu/~ece533/images/peppers.png"
+            title="Paella dish"
+          />
+        </CardBody>
+      </Grid>
+      <Grid item xs={4}>
+        <CardBody className={classes.root}>
+          {/* <Grid container direction="row" justify="center" alignItems="center"> */}
+          <CardMedia
+            className={classes.media}
+            image="https://homepages.cae.wisc.edu/~ece533/images/peppers.png"
+            title="Paella dish"
+          />
+        </CardBody>
+      </Grid>
+      <Grid item xs={4}>
         <CardBody className={classes.root}>
           {/* <Grid container direction="row" justify="center" alignItems="center"> */}
           <CardMedia
