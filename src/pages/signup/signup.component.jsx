@@ -128,10 +128,7 @@ export default function SignIn() {
           >
             Sign Up
           </Button>
-          <Grid container>
-            
-            
-          </Grid>
+          <Grid container></Grid>
         </form>
       </div>
       <Box mt={8}>

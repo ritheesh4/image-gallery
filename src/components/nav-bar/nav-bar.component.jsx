@@ -8,10 +8,8 @@ import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Logo from "../../assets/logo.png";
@@ -36,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     borderColor: "red !important",
-    borderRadius: "1.4rem",
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
@@ -174,7 +171,7 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static" className={classes.appBarColor}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            <img src={Logo} className="logo" />
+            <img src={Logo} className="logo" alt='logo'/>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
