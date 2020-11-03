@@ -1,0 +1,5 @@
+export const ImageActionTypes = {
+	FETCH_IMAGES: 'FETCH_IMAGES',
+	ADD_IMAGE: 'ADD_IMAGE',
+	DELETE_IMAGE: 'DELETE_IMAGE',
+}

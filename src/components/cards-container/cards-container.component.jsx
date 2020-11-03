@@ -25,6 +25,14 @@ export default function CardContainer() {
 			style={{ width: '95vw', margin: 'auto', minHeight: '83.4vh' }}
 		>
 			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
 		</Grid>
 	)
 }
