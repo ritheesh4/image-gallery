@@ -2,6 +2,7 @@ import React from 'react'
 // import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Card from '../card/card.component'
+import { connect } from 'react-redux' /* code change */
 // const useStyles = makeStyles((theme) => ({
 // 	root: {
 // 		maxWidth: 345,
@@ -13,26 +14,38 @@ import Card from '../card/card.component'
 // 	},
 // }))
 
-export default function CardContainer() {
+class CardContainer extends React.Component {
 	// const classes = useStyles()
-	return (
-		<Grid
-			container
-			direction='row'
-			justify='center'
-			alignItems='center'
-			spacing={3}
-			style={{ width: '95vw', margin: 'auto', minHeight: '83.4vh' }}
-		>
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-		</Grid>
-	)
+
+	render() {
+		return (
+			<Grid
+				container
+				direction='row'
+				justify='center'
+				alignItems='center'
+				spacing={3}
+				style={{ width: '95vw', margin: 'auto', minHeight: '83.4vh' }}
+			>
+				{this.props.images
+					? this.props.images.map((item) => (
+							<Card
+								id={item.id}
+								image={item.img}
+								name={item.name}
+								key={item.id}
+							/>
+					  ))
+					: ''}
+			</Grid>
+		)
+	}
 }
+
+const mapStateToProps = (state) => {
+	if (state.images.length) {
+		return { images: state.images }
+	} else return {}
+}
+
+export default connect(mapStateToProps)(CardContainer)

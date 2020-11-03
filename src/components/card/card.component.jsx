@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function Card() {
+export default function Card({ id, image, name }) {
 	const classes = useStyles()
 	return (
 		<Grid item xs={4}>
@@ -25,19 +25,16 @@ export default function Card() {
 				{/* <Grid container direction="row" justify="center" alignItems="center"> */}
 				<CardMedia
 					className={classes.media}
-					image='http://i.huffpost.com/gen/749263/original.jpg'
-					title='Paella dish'
+					image={image}
+					title={name}
 					onClick={(e) => {
 						e.preventDefault()
-						window.location.href = '/#dog'
+						window.location.href = `/#${name}`
 					}}
 				/>
 			</CardBody>
-			<div className='lightbox-target' id='dog'>
-				<img
-					src='http://i.huffpost.com/gen/749263/original.jpg'
-					alt='testing'
-				/>
+			<div className='lightbox-target' id={name}>
+				<img src={image} alt={name} />
 				<a className='lightbox-close' href='#' />
 			</div>
 		</Grid>
