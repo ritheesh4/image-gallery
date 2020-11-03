@@ -6,7 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import './modal-add-photo.styles.scss';
+import "./modal-add-photo.styles.scss";
 
 export default function AddPhoto() {
   const [open, setOpen] = React.useState(false);
@@ -21,9 +21,9 @@ export default function AddPhoto() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
+      <div className="addPhotoBtn" onClick={handleClickOpen}>
+        Add a photo
+      </div>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -40,7 +40,7 @@ export default function AddPhoto() {
             fullWidth
           />
         </DialogContent>
-		<DialogContent>
+        <DialogContent>
           <TextField
             autoFocus
             margin="dense"
@@ -54,7 +54,11 @@ export default function AddPhoto() {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary" className='submit-button'>
+          <Button
+            onClick={handleClose}
+            color="primary"
+            className="submit-button"
+          >
             Submit
           </Button>
         </DialogActions>

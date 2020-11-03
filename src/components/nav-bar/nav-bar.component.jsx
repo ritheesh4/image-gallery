@@ -16,8 +16,10 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Logo from "../../assets/logo.png";
 import "./nav-bar.styles.scss";
+import AddPhoto from "../../components/modal-add-photo/modal-add-photo.component";
 
 const useStyles = makeStyles((theme) => ({
+  appBarColor: { background: "white", boxShadow: "none" },
   grow: {
     flexGrow: 1,
   },
@@ -33,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
+    borderColor: "red !important",
     borderRadius: "1.4rem",
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
@@ -54,9 +57,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    color: "#BDBDBD",
   },
   inputRoot: {
-    color: "inherit",
+    color: "#BDBDBD",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -167,7 +171,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appBarColor}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             <img src={Logo} className="logo" />
@@ -188,7 +192,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <div className="addPhotoBtn">Add a photo</div>
+              <AddPhoto/>
             </IconButton>
             <IconButton
               edge="end"
