@@ -1,13 +1,14 @@
-import { ADD_IMAGE, fetchImages, LOAD_IMAGES } from './actions'
+import { ADD_IMAGE, fetchImages, addImage, LOAD_IMAGES } from './actions'
 
 const initialState = {
 	images: [],
+	image: null,
 }
 
 export const imagesReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_IMAGE: {
-			return { ...state, image: [...state.image, action.payload] }
+			return { ...state, image: action.payload }
 		}
 		case LOAD_IMAGES: {
 			return { ...state, images: action.payload }
@@ -17,9 +18,10 @@ export const imagesReducer = (state = initialState, action) => {
 	}
 }
 
-export const saveImage = () => async (dispatch, getState) => {
+export const saveImage = () => (dispatch, getState) => {
+	console.log('triggerd immage submission')
 	const image = getState().image
-	await fetch('http://localhost:3000/images', {
+	fetch('http://localhost:3000/images', {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
@@ -28,12 +30,13 @@ export const saveImage = () => async (dispatch, getState) => {
 		body: JSON.stringify(image),
 	})
 	alert('Success')
+	loadImages()
 }
 
 export const loadImages = () => async (dispatch, getState) => {
+	console.log('hi')
 	const images = await fetch('http://localhost:3000/images').then((res) =>
 		res.json()
 	)
-
 	dispatch(fetchImages(images))
 }

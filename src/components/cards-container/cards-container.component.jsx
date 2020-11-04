@@ -25,7 +25,12 @@ class CardContainer extends React.Component {
 				justify='center'
 				alignItems='center'
 				spacing={3}
-				style={{ width: '95vw', margin: 'auto', minHeight: '83.4vh' }}
+				style={{
+					width: '95vw',
+					margin: 'auto',
+					minHeight: '83.4vh',
+					// paddingTop: '5rem',
+				}}
 			>
 				{this.props.images
 					? this.props.images.map((item) => (
