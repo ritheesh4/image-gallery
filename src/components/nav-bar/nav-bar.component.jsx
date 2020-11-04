@@ -8,14 +8,16 @@ import InputBase from '@material-ui/core/InputBase'
 import Badge from '@material-ui/core/Badge'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
-import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import MailIcon from '@material-ui/icons/Mail'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import MoreIcon from '@material-ui/icons/MoreVert'
+import Logo from '../../assets/logo.png'
+import './nav-bar.styles.scss'
+import AddPhoto from '../../components/modal-add-photo/modal-add-photo.component'
 
 const useStyles = makeStyles((theme) => ({
+	appBarColor: { background: 'white', boxShadow: 'none' },
 	grow: {
 		flexGrow: 1,
 	},
@@ -31,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 	search: {
 		position: 'relative',
 		borderRadius: theme.shape.borderRadius,
+		borderColor: 'red !important',
 		backgroundColor: fade(theme.palette.common.white, 0.15),
 		'&:hover': {
 			backgroundColor: fade(theme.palette.common.white, 0.25),
@@ -51,9 +54,10 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
+		color: '#BDBDBD',
 	},
 	inputRoot: {
-		color: 'inherit',
+		color: '#BDBDBD',
 	},
 	inputInput: {
 		padding: theme.spacing(1, 1, 1, 0),
@@ -133,11 +137,12 @@ export default function PrimarySearchAppBar() {
 		>
 			<MenuItem>
 				<IconButton aria-label='show 4 new mails' color='inherit'>
-					<Badge badgeContent={4} color='secondary'>
-						<MailIcon />
-					</Badge>
+					{/* <Badge badgeContent={4} color="secondary"> */}
+					{/* <MailIcon /> */}
+					Logout
+					{/* </Badge> */}
 				</IconButton>
-				<p>Messages</p>
+				<p>Logout</p>
 			</MenuItem>
 			<MenuItem>
 				<IconButton aria-label='show 11 new notifications' color='inherit'>
@@ -163,25 +168,17 @@ export default function PrimarySearchAppBar() {
 
 	return (
 		<div className={classes.grow}>
-			<AppBar position='static'>
+			<AppBar position='static' className={classes.appBarColor}>
 				<Toolbar>
-					<IconButton
-						edge='start'
-						className={classes.menuButton}
-						color='inherit'
-						aria-label='open drawer'
-					>
-						<MenuIcon />
-					</IconButton>
 					<Typography className={classes.title} variant='h6' noWrap>
-						Material-UI
+						<img src={Logo} className='logo' alt='logo' />
 					</Typography>
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>
 							<SearchIcon />
 						</div>
 						<InputBase
-							placeholder='Search…'
+							placeholder='Search by name'
 							classes={{
 								root: classes.inputRoot,
 								input: classes.inputInput,
@@ -191,15 +188,8 @@ export default function PrimarySearchAppBar() {
 					</div>
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
-						<IconButton aria-label='show 4 new mails' color='inherit'>
-							<Badge badgeContent={4} color='secondary'>
-								<MailIcon />
-							</Badge>
-						</IconButton>
 						<IconButton aria-label='show 17 new notifications' color='inherit'>
-							<Badge badgeContent={17} color='secondary'>
-								<NotificationsIcon />
-							</Badge>
+							<AddPhoto />
 						</IconButton>
 						<IconButton
 							edge='end'
@@ -209,7 +199,7 @@ export default function PrimarySearchAppBar() {
 							onClick={handleProfileMenuOpen}
 							color='inherit'
 						>
-							<AccountCircle />
+							{/* <AccountCircle /> */}
 						</IconButton>
 					</div>
 					<div className={classes.sectionMobile}>
