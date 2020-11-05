@@ -48,8 +48,9 @@ class CardContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	if (state.images.length) {
-		return { images: state.images }
+	console.log(state)
+	if (state.imagesReducer.images.length) {
+		return { images: state.imagesReducer.images }
 	} else return {}
 }
 
