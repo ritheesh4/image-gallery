@@ -22,26 +22,35 @@ export const signInRequest = (user) => async (dispatch) => {
 	console.log(user)
 	try {
 		axios
-			.post('http://localhost:3000/login', {
+			.post('http://localhost:8000/auth/login', {
 				email: user.email,
 				password: user.password,
 			})
 			.then((res) => {
-				console.log('respones of saved user', res.data.email)
-				if (res.data.email) {
+				console.log('respones of saved user', res.data.access_token)
+				if (res.data.access_token) {
 					console.log('logged in')
 				}
-				dispatch(signIn(res.data.email))
+				dispatch(signIn(res.data.access_token))
 			})
 	} catch {}
 }
 
-export const signUpRequest = () => async (dispatch) => {
+export const signUpRequest = (user) => async (dispatch) => {
 	console.log('loaded')
 	try {
-		const userDetails = await axios.get('http://localhost:3000/user')
-		console.log(userDetails)
-		dispatch(signUp(userDetails.data))
+		axios
+			.post('http://localhost:8000/auth/login', {
+				email: user.email,
+				password: user.password,
+			})
+			.then((res) => {
+				console.log('respones of saved user', res.data.access_token)
+				if (res.data.access_token) {
+					console.log('logged in')
+				}
+				dispatch(signUp(res.data.access_token))
+			})
 	} catch (err) {
 		// Handle Error Here
 		console.error(err)
