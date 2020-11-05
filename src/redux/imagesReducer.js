@@ -1,4 +1,5 @@
-import { ADD_IMAGE, fetchImages, addImage, LOAD_IMAGES } from './actions'
+import { ADD_IMAGE, fetchImages, LOAD_IMAGES } from './actions'
+import axios from 'axios'
 
 const initialState = {
 	images: [],
@@ -18,9 +19,23 @@ export const imagesReducer = (state = initialState, action) => {
 	}
 }
 
-export const saveImage = () => (dispatch, getState) => {
-	console.log('triggerd immage submission')
-	const image = getState().image
+// export const saveImage = () => (dispatch, getState) => {
+// 	console.log('triggerd immage submission')
+// 	const image = getState().image
+// 	fetch('http://localhost:3000/images', {
+// 		method: 'POST',
+// 		headers: {
+// 			Accept: 'application/json',
+// 			'Content-type': 'application/json',
+// 		},
+// 		body: JSON.stringify(image),
+// 	})
+// 	alert('Success')
+// 	loadImages()
+// }
+
+export const saveImage = (image) => {
+	console.log('hello')
 	fetch('http://localhost:3000/images', {
 		method: 'POST',
 		headers: {
@@ -34,9 +49,11 @@ export const saveImage = () => (dispatch, getState) => {
 }
 
 export const loadImages = () => async (dispatch, getState) => {
-	console.log('hi')
-	const images = await fetch('http://localhost:3000/images').then((res) =>
-		res.json()
-	)
-	dispatch(fetchImages(images))
+	try {
+		const images = await axios.get('http://localhost:3000/images')
+		dispatch(fetchImages(images.data))
+	} catch (err) {
+		// Handle Error Here
+		console.error(err)
+	}
 }

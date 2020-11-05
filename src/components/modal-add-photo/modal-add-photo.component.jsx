@@ -7,7 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import './modal-add-photo.styles.scss'
 import { saveImage } from '../../redux/imagesReducer'
-import { connect } from 'react-redux'
 
 const AddPhoto = () => {
 	const [open, setOpen] = React.useState(false)
@@ -21,18 +20,19 @@ const AddPhoto = () => {
 	}
 
 	const [values, setValues] = React.useState({
-		label: '',
-		url: '',
+		name: '',
+		img: '',
 	})
 
-	const handleChange = (label) => (event) => {
-		setValues({ ...values, [label]: event.target.value })
+	const handleChange = (name) => (event) => {
+		setValues({ ...values, [name]: event.target.value })
 	}
 
 	const submitData = () => {
 		console.log(values)
+		saveImage(values)
 		// console.log(saveImage)
-		values.dispatch(saveImage())
+		// values.dispatch(saveImage())
 	}
 
 	return (
@@ -51,12 +51,12 @@ const AddPhoto = () => {
 						<TextField
 							autoFocus
 							margin='dense'
-							id='label'
-							label='Label'
+							id='name'
+							label='name'
 							type='label'
 							fullWidth
-							value={values.label}
-							onChange={handleChange('label')}
+							value={values.name}
+							onChange={handleChange('name')}
 						/>
 					</DialogContent>
 					<DialogContent>
@@ -67,8 +67,8 @@ const AddPhoto = () => {
 							label='Photo URL'
 							type='url'
 							fullWidth
-							value={values.url}
-							onChange={handleChange('url')}
+							value={values.img}
+							onChange={handleChange('img')}
 						/>
 					</DialogContent>
 					<DialogActions>
