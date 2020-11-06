@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import { connect } from 'react-redux'
 import { signInRequest } from '../../redux/loginReducer'
+import { useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 function Copyright() {
 	return (
@@ -48,7 +50,18 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
+// const protectedContent = () => {
+// 	console.log('redirected to protected page')
+// 	return <Redirect to='/home' />
+// }
+
 const SignIn = (props) => {
+	const history = useHistory()
+	if (localStorage.getItem('token')) {
+		console.log('token here')
+		history.push('/home')
+		// protectedContent()
+	}
 	const classes = useStyles()
 	const [values, setValues] = React.useState({
 		email: '',
@@ -60,7 +73,7 @@ const SignIn = (props) => {
 	}
 
 	const submitData = (event) => {
-		event.preventDefault()
+		// event.preventDefault()
 		console.log(values)
 		// console.log(saveImage)
 		// values.dispatch(saveImage())

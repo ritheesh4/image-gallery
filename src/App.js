@@ -5,10 +5,19 @@ import HomePage from './pages/homepage/homepage.component'
 import Login from './pages/login/login.component'
 import SignUp from './pages/signup/signup.component'
 import GuardedRoute from './utils/GuardedRoute'
+let isAutheticated = false
+
+const checkAuth = () => {
+	if (localStorage.getItem('token')) {
+		isAutheticated = true
+	} else {
+		isAutheticated = false
+	}
+}
 
 class App extends React.Component {
 	render() {
-		const isAutheticated = true
+		checkAuth()
 		return (
 			<div>
 				<Switch>
