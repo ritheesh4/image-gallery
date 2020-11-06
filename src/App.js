@@ -4,14 +4,20 @@ import './App.css'
 import HomePage from './pages/homepage/homepage.component'
 import Login from './pages/login/login.component'
 import SignUp from './pages/signup/signup.component'
+import GuardedRoute from './utils/GuardedRoute'
 
 class App extends React.Component {
 	render() {
+		const isAutheticated = true
 		return (
 			<div>
 				<Switch>
-					<Route exact path='/' component={HomePage} />
-					<Route exact path='/login' component={Login} />
+					<GuardedRoute
+						path='/home'
+						component={HomePage}
+						auth={isAutheticated}
+					/>
+					<Route exact path='/' component={Login} />
 					<Route exact path='/signup' component={SignUp} />
 				</Switch>
 			</div>

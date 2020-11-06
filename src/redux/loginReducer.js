@@ -1,6 +1,8 @@
 import { SIGN_IN, SIGN_UP, signIn, signUp } from './login.actions'
 import axios from 'axios'
 
+const HOST_URL = 'http://localhost:8000'
+
 const initialState = {
 	token: null,
 }
@@ -22,7 +24,7 @@ export const signInRequest = (user) => async (dispatch) => {
 	console.log(user)
 	try {
 		axios
-			.post('http://localhost:8000/auth/login', {
+			.post(`${HOST_URL}/auth/login`, {
 				email: user.email,
 				password: user.password,
 			})
@@ -31,7 +33,8 @@ export const signInRequest = (user) => async (dispatch) => {
 				if (res.data.access_token) {
 					console.log('logged in')
 				}
-				dispatch(signIn(res.data.access_token))
+				// dispatch(signIn(res.data.access_token))
+				localStorage.setItem('token', res.data.access_token)
 			})
 	} catch {}
 }
@@ -40,7 +43,7 @@ export const signUpRequest = (user) => async (dispatch) => {
 	console.log('loaded')
 	try {
 		axios
-			.post('http://localhost:8000/auth/login', {
+			.post(`${HOST_URL}/auth/register`, {
 				email: user.email,
 				password: user.password,
 			})
