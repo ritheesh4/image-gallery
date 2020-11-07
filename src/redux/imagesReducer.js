@@ -21,21 +21,29 @@ export const imagesReducer = (state = initialState, action) => {
 	}
 }
 
-export const saveImage = (image) => {
+export const saveImage = (image) => async (dispatch) => {
+	const body = {
+		name: image.name,
+		img: image.img,
+	}
+	const token = localStorage.getItem('access_token')
+
 	try {
-		axios
-			.post(`${HOST_URL}/images`, {
-				name: image.name,
-				img: image.img,
+		await axios
+			.post(`${HOST_URL}/images`, body, {
+				headers: {
+					Authorization: `Bearer ${token} `,
+				},
 			})
 			.then((res) => {
-				console.log('respones of saved image', res.data)
-				async function fetchNewData() {
-					const images = await axios.get(`${HOST_URL}/images`)
-					fetchImages(images.data)
-					console.log(images.data)
-				}
-				fetchNewData()
+				console.log('respones of saved image', res)
+				// dispatch(loadImages())
+				// async function fetchNewData() {
+				// 	const images = await axios.get(`${HOST_URL}/images`)
+				// 	fetchImages(images.data)
+				// 	console.log(images.data)
+				// }
+				// fetchNewData()
 			})
 	} catch {}
 }

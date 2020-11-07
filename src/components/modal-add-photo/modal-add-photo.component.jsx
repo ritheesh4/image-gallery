@@ -7,8 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import './modal-add-photo.styles.scss'
 import { saveImage } from '../../redux/imagesReducer'
+import { connect } from 'react-redux'
 
-const AddPhoto = () => {
+const AddPhoto = (props) => {
 	const [open, setOpen] = React.useState(false)
 
 	const handleClickOpen = () => {
@@ -30,7 +31,10 @@ const AddPhoto = () => {
 
 	const submitData = () => {
 		console.log(values)
-		saveImage(values)
+		console.log(props)
+		this.props.dispatch(saveImage(values))
+		// saveImage(values)
+		handleClose()
 		// console.log(saveImage)
 		// values.dispatch(saveImage())
 	}
@@ -90,4 +94,6 @@ const AddPhoto = () => {
 	)
 }
 
-export default AddPhoto
+const mapDispatchToProps = (props) => ({})
+
+export default connect(null, mapDispatchToProps)(AddPhoto)

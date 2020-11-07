@@ -45,7 +45,10 @@ export const signInRefreshRequest = () => async (dispatch) => {
 		try {
 			axios
 				.post(`${HOST_URL}/auth/login`, {
-					refresh_token: localStorage.getItem('refresh_token'),
+					headers: {
+						Authorization: localStorage.getItem('refresh_token'),
+					},
+					body: {},
 				})
 				.then((res) => {
 					console.log('respones of saved user', res.data.access_token)
