@@ -42,7 +42,7 @@ export const saveImage = (image) => {
 
 export const loadImages = () => async (dispatch) => {
 	try {
-		const token = localStorage.getItem('token')
+		const token = localStorage.getItem('access_token')
 		const images = await axios.get(`${HOST_URL}/images`, {
 			headers: {
 				Authorization: `Bearer ${token} `,

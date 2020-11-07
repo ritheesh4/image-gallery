@@ -85,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function PrimarySearchAppBar() {
+	const history = useHistory()
 	const classes = useStyles()
 	const [anchorEl, setAnchorEl] = React.useState(null)
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -110,9 +111,10 @@ export default function PrimarySearchAppBar() {
 	}
 
 	const logoutAction = () => {
-		localStorage.removeItem('token')
-		// const history = useHistory()
-		// useHistory().push('/home')
+		localStorage.removeItem('access_token')
+		localStorage.removeItem('refresh_token')
+
+		history.push('/login')
 	}
 
 	const menuId = 'primary-search-account-menu'

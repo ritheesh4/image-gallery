@@ -14,7 +14,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import { connect } from 'react-redux'
 import { signInRequest } from '../../redux/loginReducer'
+import { signInRefreshRequest } from '../../redux/loginReducer'
 import { useHistory } from 'react-router-dom'
+import jwt_decode from 'jwt-decode'
 
 const Copyright = () => {
 	return (
@@ -51,8 +53,16 @@ const useStyles = makeStyles((theme) => ({
 
 const SignIn = (props) => {
 	const history = useHistory()
-	if (localStorage.getItem('token')) {
-		history.push('/home')
+	if (localStorage.getItem('access_token')) {
+		const token = localStorage.getItem('access_token')
+		let decodedToken = jwt_decode(token)
+		let jwt_exp = decodedToken.exp
+		let current_time = new Date().getTime() / 1000
+		if (current_time > jwt_exp) {
+			props.dispatch(signInRefreshRequest())
+		} else {
+			history.push('/home')
+		}
 	}
 	const classes = useStyles()
 	const [values, setValues] = React.useState({

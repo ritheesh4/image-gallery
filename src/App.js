@@ -5,11 +5,20 @@ import HomePage from './pages/homepage/homepage.component'
 import Login from './pages/login/login.component'
 import SignUp from './pages/signup/signup.component'
 import GuardedRoute from './utils/GuardedRoute'
+import jwt_decode from 'jwt-decode'
 let isAutheticated = false
 
 const checkAuth = () => {
-	if (localStorage.getItem('token')) {
-		isAutheticated = true
+	if (localStorage.getItem('access_token')) {
+		const token = localStorage.getItem('access_token')
+		let decodedToken = jwt_decode(token)
+		let jwt_exp = decodedToken.exp
+		let current_time = new Date().getTime() / 1000
+		if (current_time > jwt_exp) {
+			isAutheticated = false
+		} else {
+			isAutheticated = true
+		}
 	} else {
 		isAutheticated = false
 	}
