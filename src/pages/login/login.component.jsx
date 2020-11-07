@@ -12,6 +12,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
+import { connect } from 'react-redux'
+import { signInRequest } from '../../redux/loginReducer'
+import { useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 function Copyright() {
 	return (
@@ -46,8 +50,35 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function SignIn() {
+// const protectedContent = () => {
+// 	console.log('redirected to protected page')
+// 	return <Redirect to='/home' />
+// }
+
+const SignIn = (props) => {
+	const history = useHistory()
+	if (localStorage.getItem('token')) {
+		console.log('token here')
+		history.push('/home')
+		// protectedContent()
+	}
 	const classes = useStyles()
+	const [values, setValues] = React.useState({
+		email: '',
+		password: '',
+	})
+	const handleChange = (email) => (event) => {
+		setValues({ ...values, [email]: event.target.value })
+		// console.log(event.target.value)
+	}
+
+	const submitData = (event) => {
+		// event.preventDefault()
+		console.log(values)
+		// console.log(saveImage)
+		// values.dispatch(saveImage())
+		props.dispatch(signInRequest(values))
+	}
 
 	return (
 		<Container component='main' maxWidth='xs'>
@@ -70,6 +101,8 @@ export default function SignIn() {
 						name='email'
 						autoComplete='email'
 						autoFocus
+						value={values.email}
+						onChange={handleChange('email')}
 					/>
 					<TextField
 						variant='outlined'
@@ -81,6 +114,8 @@ export default function SignIn() {
 						type='password'
 						id='password'
 						autoComplete='current-password'
+						value={values.password}
+						onChange={handleChange('password')}
 					/>
 					<FormControlLabel
 						control={<Checkbox value='remember' color='primary' />}
@@ -92,6 +127,7 @@ export default function SignIn() {
 						variant='contained'
 						color='primary'
 						className={classes.submit}
+						onClick={submitData}
 					>
 						Sign In
 					</Button>
@@ -115,3 +151,9 @@ export default function SignIn() {
 		</Container>
 	)
 }
+
+const mapStateToProps = (state) => ({
+	state: state,
+})
+
+export default connect(mapStateToProps)(SignIn)

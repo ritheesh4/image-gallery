@@ -1,9 +1,9 @@
 export const ADD_IMAGE = 'ADD_IMAGE'
 export const LOAD_IMAGES = 'LOAD_IMAGES'
 
-export const addImage = (note) => ({
+export const addImage = (image) => ({
 	type: ADD_IMAGE,
-	payload: note,
+	payload: image,
 })
 
 export const fetchImages = (images) => ({

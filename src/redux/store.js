@@ -1,5 +1,13 @@
 import { createStore, applyMiddleware } from 'redux'
-import { imagesReducer } from './imagesReducer'
+// import { imagesReducer } from './imagesReducer'
+// import { userAuthentication } from './loginReducer'
+import logger from 'redux-logger'
 import thunk from 'redux-thunk'
+import combineReducers from './rootReducer'
 
-export const store = createStore(imagesReducer, applyMiddleware(thunk))
+const middlewares = [logger, thunk]
+
+export const store = createStore(
+	combineReducers,
+	applyMiddleware(...middlewares)
+)

@@ -6,8 +6,9 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import './modal-add-photo.styles.scss'
+import { saveImage } from '../../redux/imagesReducer'
 
-export default function AddPhoto() {
+const AddPhoto = () => {
 	const [open, setOpen] = React.useState(false)
 
 	const handleClickOpen = () => {
@@ -16,6 +17,22 @@ export default function AddPhoto() {
 
 	const handleClose = () => {
 		setOpen(false)
+	}
+
+	const [values, setValues] = React.useState({
+		name: '',
+		img: '',
+	})
+
+	const handleChange = (name) => (event) => {
+		setValues({ ...values, [name]: event.target.value })
+	}
+
+	const submitData = () => {
+		console.log(values)
+		saveImage(values)
+		// console.log(saveImage)
+		// values.dispatch(saveImage())
 	}
 
 	return (
@@ -29,39 +46,48 @@ export default function AddPhoto() {
 				aria-labelledby='form-dialog-title'
 			>
 				<DialogTitle id='form-dialog-title'>Add a new photo</DialogTitle>
-				<DialogContent>
-					<TextField
-						autoFocus
-						margin='dense'
-						id='name'
-						label='Label'
-						type='email'
-						fullWidth
-					/>
-				</DialogContent>
-				<DialogContent>
-					<TextField
-						autoFocus
-						margin='dense'
-						id='name'
-						label='Photo URL'
-						type='email'
-						fullWidth
-					/>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={handleClose} color='primary'>
-						Cancel
-					</Button>
-					<Button
-						onClick={handleClose}
-						color='primary'
-						className='submit-button'
-					>
-						Submit
-					</Button>
-				</DialogActions>
+				<form>
+					<DialogContent>
+						<TextField
+							autoFocus
+							margin='dense'
+							id='name'
+							label='name'
+							type='label'
+							fullWidth
+							value={values.name}
+							onChange={handleChange('name')}
+						/>
+					</DialogContent>
+					<DialogContent>
+						<TextField
+							autoFocus
+							margin='dense'
+							id='image'
+							label='Photo URL'
+							type='url'
+							fullWidth
+							value={values.img}
+							onChange={handleChange('img')}
+						/>
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={handleClose} color='primary'>
+							Cancel
+						</Button>
+						<Button
+							onClick={submitData}
+							color='primary'
+							className='submit-button'
+							type='button'
+						>
+							Submit
+						</Button>
+					</DialogActions>
+				</form>
 			</Dialog>
 		</div>
 	)
 }
+
+export default AddPhoto

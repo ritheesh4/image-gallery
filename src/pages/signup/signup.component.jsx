@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
+import { signUpRequest } from '../../redux/loginReducer'
+import { connect } from 'react-redux'
 
 function Copyright() {
 	return (
@@ -46,8 +48,24 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function SignIn() {
+const SignUp = (props) => {
 	const classes = useStyles()
+	const [values, setValues] = React.useState({
+		email: '',
+		password: '',
+	})
+	const handleChange = (email) => (event) => {
+		setValues({ ...values, [email]: event.target.value })
+		// console.log(event.target.value)
+	}
+
+	const submitData = (event) => {
+		event.preventDefault()
+		console.log(values)
+		// console.log(saveImage)
+		// values.dispatch(saveImage())
+		props.dispatch(signUpRequest(values))
+	}
 
 	return (
 		<Container component='main' maxWidth='xs'>
@@ -92,6 +110,8 @@ export default function SignIn() {
 						name='email'
 						autoComplete='email'
 						autoFocus
+						value={values.email}
+						onChange={handleChange('email')}
 					/>
 					<TextField
 						variant='outlined'
@@ -103,6 +123,8 @@ export default function SignIn() {
 						type='password'
 						id='password'
 						autoComplete='current-password'
+						value={values.password}
+						onChange={handleChange('password')}
 					/>
 					<TextField
 						variant='outlined'
@@ -125,6 +147,7 @@ export default function SignIn() {
 						variant='contained'
 						color='primary'
 						className={classes.submit}
+						onClick={submitData}
 					>
 						Sign Up
 					</Button>
@@ -137,3 +160,9 @@ export default function SignIn() {
 		</Container>
 	)
 }
+
+const mapStateToProps = (state) => ({
+	state: state,
+})
+
+export default connect(mapStateToProps)(SignUp)

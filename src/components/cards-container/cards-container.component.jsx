@@ -25,7 +25,12 @@ class CardContainer extends React.Component {
 				justify='center'
 				alignItems='center'
 				spacing={3}
-				style={{ width: '95vw', margin: 'auto', minHeight: '83.4vh' }}
+				style={{
+					width: '95vw',
+					margin: 'auto',
+					minHeight: '83.4vh',
+					// paddingTop: '5rem',
+				}}
 			>
 				{this.props.images
 					? this.props.images.map((item) => (
@@ -43,8 +48,9 @@ class CardContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	if (state.images.length) {
-		return { images: state.images }
+	console.log(state)
+	if (state.imagesReducer.images.length) {
+		return { images: state.imagesReducer.images }
 	} else return {}
 }
 
