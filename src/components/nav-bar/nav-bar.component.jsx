@@ -15,6 +15,7 @@ import MoreIcon from '@material-ui/icons/MoreVert'
 import Logo from '../../assets/logo.png'
 import './nav-bar.styles.scss'
 import AddPhoto from '../../components/modal-add-photo/modal-add-photo.component'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
 	appBarColor: { background: 'white', boxShadow: 'none' },
@@ -108,6 +109,12 @@ export default function PrimarySearchAppBar() {
 		setMobileMoreAnchorEl(event.currentTarget)
 	}
 
+	const logoutAction = () => {
+		localStorage.removeItem('token')
+		// const history = useHistory()
+		// useHistory().push('/home')
+	}
+
 	const menuId = 'primary-search-account-menu'
 	const renderMenu = (
 		<Menu
@@ -120,7 +127,7 @@ export default function PrimarySearchAppBar() {
 			onClose={handleMenuClose}
 		>
 			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+			<MenuItem onClick={logoutAction}>Logout</MenuItem>
 		</Menu>
 	)
 
@@ -197,9 +204,9 @@ export default function PrimarySearchAppBar() {
 							aria-controls={menuId}
 							aria-haspopup='true'
 							onClick={handleProfileMenuOpen}
-							color='inherit'
+							// color='inherit'
 						>
-							{/* <AccountCircle /> */}
+							<AccountCircle />
 						</IconButton>
 					</div>
 					<div className={classes.sectionMobile}>

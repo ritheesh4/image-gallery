@@ -15,9 +15,8 @@ import Container from '@material-ui/core/Container'
 import { connect } from 'react-redux'
 import { signInRequest } from '../../redux/loginReducer'
 import { useHistory } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
 
-function Copyright() {
+const Copyright = () => {
 	return (
 		<Typography variant='body2' color='textSecondary' align='center'>
 			{'Copyright © '}
@@ -50,17 +49,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-// const protectedContent = () => {
-// 	console.log('redirected to protected page')
-// 	return <Redirect to='/home' />
-// }
-
 const SignIn = (props) => {
 	const history = useHistory()
 	if (localStorage.getItem('token')) {
-		console.log('token here')
 		history.push('/home')
-		// protectedContent()
 	}
 	const classes = useStyles()
 	const [values, setValues] = React.useState({
@@ -69,14 +61,9 @@ const SignIn = (props) => {
 	})
 	const handleChange = (email) => (event) => {
 		setValues({ ...values, [email]: event.target.value })
-		// console.log(event.target.value)
 	}
 
 	const submitData = (event) => {
-		// event.preventDefault()
-		console.log(values)
-		// console.log(saveImage)
-		// values.dispatch(saveImage())
 		props.dispatch(signInRequest(values))
 	}
 

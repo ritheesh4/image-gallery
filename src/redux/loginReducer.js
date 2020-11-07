@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_UP, signIn, signUp } from './login.actions'
+import { SIGN_IN, SIGN_UP, signUp } from './login.actions'
 import axios from 'axios'
 
 const HOST_URL = 'http://localhost:8000'
@@ -52,6 +52,7 @@ export const signUpRequest = (user) => async (dispatch) => {
 				if (res.data.access_token) {
 					console.log('logged in')
 				}
+				localStorage.setItem('token', res.data.access_token)
 				dispatch(signUp(res.data.access_token))
 			})
 	} catch (err) {

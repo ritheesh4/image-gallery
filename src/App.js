@@ -27,6 +27,7 @@ class App extends React.Component {
 						auth={isAutheticated}
 					/>
 					<Route exact path='/' component={Login} />
+					<Route exact path='/login' component={Login} />
 					<Route exact path='/signup' component={SignUp} />
 				</Switch>
 			</div>
