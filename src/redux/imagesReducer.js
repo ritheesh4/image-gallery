@@ -36,15 +36,7 @@ export const saveImage = (image) => async (dispatch) => {
 				},
 			})
 			.then((res) => {
-				console.log('respones of saved image', res)
-				// dispatch(loadImages())
 				dispatch(loadImages())
-				// async function fetchNewData() {
-				// 	const images = await axios.get(`${HOST_URL}/images`)
-				// 	fetchImages(images.data)
-				// 	console.log(images.data)
-				// }
-				// fetchNewData()
 			})
 	} catch {}
 }
@@ -53,6 +45,21 @@ export const loadImages = () => async (dispatch) => {
 	try {
 		const token = localStorage.getItem('access_token')
 		const images = await axios.get(`${HOST_URL}/images`, {
+			headers: {
+				Authorization: `Bearer ${token} `,
+			},
+		})
+		dispatch(fetchImages(images.data))
+	} catch (err) {
+		// Handle Error Here
+		console.error(err)
+	}
+}
+
+export const searchImage = (seachWord) => async (dispatch) => {
+	try {
+		const token = localStorage.getItem('access_token')
+		const images = await axios.get(`${HOST_URL}/images?q=${seachWord}`, {
 			headers: {
 				Authorization: `Bearer ${token} `,
 			},

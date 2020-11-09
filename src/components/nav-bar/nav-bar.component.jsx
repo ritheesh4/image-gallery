@@ -16,6 +16,8 @@ import Logo from '../../assets/logo.png'
 import './nav-bar.styles.scss'
 import AddPhoto from '../../components/modal-add-photo/modal-add-photo.component'
 import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { searchImage } from '../../redux/imagesReducer'
 
 const useStyles = makeStyles((theme) => ({
 	appBarColor: { background: 'white', boxShadow: 'none' },
@@ -84,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function PrimarySearchAppBar() {
+const PrimarySearchAppBar = (props) => {
 	const history = useHistory()
 	const classes = useStyles()
 	const [anchorEl, setAnchorEl] = React.useState(null)
@@ -113,8 +115,15 @@ export default function PrimarySearchAppBar() {
 	const logoutAction = () => {
 		localStorage.removeItem('access_token')
 		localStorage.removeItem('refresh_token')
-
 		history.push('/login')
+	}
+
+	const [values, setValues] = React.useState({
+		name: '',
+	})
+	const handleChange = (name) => (event) => {
+		setValues({ ...values, [name]: event.target.value })
+		props.dispatch(searchImage(values.name))
 	}
 
 	const menuId = 'primary-search-account-menu'
@@ -193,6 +202,8 @@ export default function PrimarySearchAppBar() {
 								input: classes.inputInput,
 							}}
 							inputProps={{ 'aria-label': 'search' }}
+							value={values.name}
+							onChange={handleChange('name')}
 						/>
 					</div>
 					<div className={classes.grow} />
@@ -229,3 +240,7 @@ export default function PrimarySearchAppBar() {
 		</div>
 	)
 }
+
+const mapStateToProps = (state) => ({})
+
+export default connect(mapStateToProps)(PrimarySearchAppBar)
