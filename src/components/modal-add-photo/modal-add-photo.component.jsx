@@ -30,13 +30,8 @@ const AddPhoto = (props) => {
 	}
 
 	const submitData = () => {
-		console.log(values)
-		console.log(props)
-		this.props.dispatch(saveImage(values))
-		// saveImage(values)
+		props.dispatch(saveImage(values))
 		handleClose()
-		// console.log(saveImage)
-		// values.dispatch(saveImage())
 	}
 
 	return (
@@ -94,6 +89,5 @@ const AddPhoto = (props) => {
 	)
 }
 
-const mapDispatchToProps = (props) => ({})
-
-export default connect(null, mapDispatchToProps)(AddPhoto)
+const mapStateToProps = (state) => ({})
+export default connect(mapStateToProps)(AddPhoto)
