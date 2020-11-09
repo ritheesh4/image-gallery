@@ -27,9 +27,9 @@ export default function Card({ id, image, name }) {
 					className={classes.media}
 					image={image}
 					title={name}
-					onClick={(e) => {
+					onDoubleClick={(e) => {
 						e.preventDefault()
-						window.location.href = `/#${name}`
+						window.location.href = `#${name}`
 					}}
 				/>
 			</CardBody>

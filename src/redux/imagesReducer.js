@@ -1,4 +1,4 @@
-import { ADD_IMAGE, fetchImages, LOAD_IMAGES } from './actions'
+import { ADD_IMAGE, fetchImages, LOAD_IMAGES, SELECT_IMAGE } from './actions'
 import axios from 'axios'
 
 const HOST_URL = 'http://localhost:8000'
@@ -6,6 +6,7 @@ const HOST_URL = 'http://localhost:8000'
 const initialState = {
 	images: [],
 	image: null,
+	currentImage: null,
 }
 
 export const imagesReducer = (state = initialState, action) => {
@@ -15,6 +16,9 @@ export const imagesReducer = (state = initialState, action) => {
 		}
 		case LOAD_IMAGES: {
 			return { ...state, images: action.payload }
+		}
+		case SELECT_IMAGE: {
+			return { image: action.payload }
 		}
 		default:
 			return state
