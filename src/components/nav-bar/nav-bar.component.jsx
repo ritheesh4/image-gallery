@@ -18,6 +18,7 @@ import AddPhoto from '../../components/modal-add-photo/modal-add-photo.component
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { searchImage } from '../../redux/imagesReducer'
+import { loadImages } from '../../redux/imagesReducer'
 
 const useStyles = makeStyles((theme) => ({
 	appBarColor: { background: 'white', boxShadow: 'none' },
@@ -123,7 +124,9 @@ const PrimarySearchAppBar = (props) => {
 	})
 	const handleChange = (name) => (event) => {
 		setValues({ ...values, [name]: event.target.value })
-		props.dispatch(searchImage(values.name))
+		if (values.name.length) {
+			props.dispatch(searchImage(values.name))
+		} else props.dispatch(loadImages())
 	}
 
 	const menuId = 'primary-search-account-menu'
