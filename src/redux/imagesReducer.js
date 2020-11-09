@@ -38,6 +38,7 @@ export const saveImage = (image) => async (dispatch) => {
 			.then((res) => {
 				console.log('respones of saved image', res)
 				// dispatch(loadImages())
+				dispatch(loadImages())
 				// async function fetchNewData() {
 				// 	const images = await axios.get(`${HOST_URL}/images`)
 				// 	fetchImages(images.data)
