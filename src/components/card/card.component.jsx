@@ -18,12 +18,16 @@ const useStyles = makeStyles((theme) => ({
 		'&:hover $imageDescription': {
 			display: 'block',
 		},
+		'&:hover $media': {
+			opacity: 0.2,
+		},
 	},
 	media: {
 		height: 0,
 		paddingTop: '56.25%', // 16:9
+		opacity: 1,
+		backgroundColor: 'black',
 	},
-
 	deleteBtn: {
 		display: 'none',
 	},
@@ -35,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '5%',
 		marginRight: '5%',
 		marginTop: '10%',
+		overflow: 'hidden',
 		// width: '4rem',
 	},
 }))

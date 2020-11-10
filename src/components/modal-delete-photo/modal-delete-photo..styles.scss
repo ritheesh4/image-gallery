@@ -22,6 +22,10 @@
   margin-bottom: 7%;
   margin-right: 2%;
   margin-top: 1%;
+  z-index: 1;
+}
+.deleteButton:hover{
+  background-color: black;
 }
 
 .delete-text{

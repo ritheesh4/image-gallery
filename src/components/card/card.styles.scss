@@ -125,3 +125,12 @@ a.lightbox-close:after {
 .lightbox-target:target a.lightbox-close {
   top: 0px;
 }
+
+.card-media-section{
+  display: block;
+  opacity: 1;
+}
+.card-media-section:hover{
+  opacity: 0.2;
+}
+
