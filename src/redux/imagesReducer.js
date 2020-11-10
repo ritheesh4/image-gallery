@@ -74,3 +74,25 @@ export const searchImage = (seachWord) => async (dispatch) => {
 		console.error(err)
 	}
 }
+
+export const deleteImage = (password, id) => async (dispatch) => {
+	const body = {
+		password: password,
+		id: id,
+	}
+
+	console.log(body)
+	// const token = localStorage.getItem('access_token')
+
+	// try {
+	// 	await axios
+	// 		.delete(`${HOST_URL}/images`, body, {
+	// 			headers: {
+	// 				Authorization: `Bearer ${token} `,
+	// 			},
+	// 		})
+	// 		.then((res) => {
+	// 			dispatch(loadImages())
+	// 		})
+	// } catch {}
+}
