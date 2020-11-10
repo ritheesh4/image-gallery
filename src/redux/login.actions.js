@@ -6,7 +6,7 @@ export const signUp = (token) => ({
 	payload: token,
 })
 
-export const signIn = (token) => ({
+export const signIn = (userName) => ({
 	type: SIGN_IN,
-	payload: token,
+	payload: userName,
 })

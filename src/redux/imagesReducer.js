@@ -1,5 +1,6 @@
 import { ADD_IMAGE, fetchImages, LOAD_IMAGES, SELECT_IMAGE } from './actions'
 import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 
 const HOST_URL = 'http://localhost:8000'
 
@@ -76,23 +77,44 @@ export const searchImage = (seachWord) => async (dispatch) => {
 }
 
 export const deleteImage = (password, id) => async (dispatch) => {
-	const body = {
-		password: password,
-		id: id,
-	}
+	const userName = getUserName()
 
-	console.log(body)
-	// const token = localStorage.getItem('access_token')
+	try {
+		axios
+			.post(`${HOST_URL}/auth/login`, {
+				email: userName,
+				password: password.password,
+			})
+			.then((res) => {
+				if (res.data.access_token) {
+					// dispatch(signIn(decodedToken))
+					console.log('delete executing')
+					dispatch(deleteImageRequest(id))
+				} else {
+					alert('wrong password')
+				}
+			})
+	} catch {}
+}
 
-	// try {
-	// 	await axios
-	// 		.delete(`${HOST_URL}/images`, body, {
-	// 			headers: {
-	// 				Authorization: `Bearer ${token} `,
-	// 			},
-	// 		})
-	// 		.then((res) => {
-	// 			dispatch(loadImages())
-	// 		})
-	// } catch {}
+const deleteImageRequest = (id) => (dispatch) => {
+	const token = localStorage.getItem('access_token')
+	try {
+		axios
+			.delete(`${HOST_URL}/images/${id}`, {
+				headers: {
+					Authorization: `Bearer ${token} `,
+				},
+			})
+			.then((res) => {
+				dispatch(loadImages())
+			})
+	} catch {}
+}
+
+const getUserName = () => {
+	let decodedToken = jwt_decode(localStorage.getItem('access_token'))
+	// console.log(decodedToken)
+	const userName = decodedToken.email
+	return userName
 }

@@ -1,17 +1,17 @@
-import { SIGN_IN, SIGN_UP, signUp } from './login.actions'
+import { SIGN_IN, SIGN_UP, signUp, signIn } from './login.actions'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
 const HOST_URL = 'http://localhost:8000'
 
 const initialState = {
-	token: null,
+	userName: null,
 }
 
 export const userAuthentication = (state = initialState, action) => {
 	switch (action.type) {
 		case SIGN_IN: {
-			return { ...state, token: action.payload }
+			return { ...state, userName: action.payload }
 		}
 		case SIGN_UP: {
 			return { ...state, token: action.payload }
@@ -22,7 +22,6 @@ export const userAuthentication = (state = initialState, action) => {
 }
 
 export const signInRequest = (user) => async (dispatch) => {
-	console.log(user)
 	try {
 		axios
 			.post(`${HOST_URL}/auth/login`, {
@@ -33,6 +32,8 @@ export const signInRequest = (user) => async (dispatch) => {
 				if (res.data.access_token) {
 					localStorage.setItem('access_token', res.data.access_token)
 					localStorage.setItem('refresh_token', res.data.access_token)
+					let decodedToken = jwt_decode(res.data.access_token)
+					dispatch(signIn(decodedToken))
 				}
 			})
 	} catch {}
@@ -88,6 +89,7 @@ export const signUpRequest = (user) => async (dispatch) => {
 
 const checkTokenExpiry = (token) => {
 	let decodedToken = jwt_decode(token)
+	console.log(decodedToken)
 	let jwt_exp = decodedToken.exp
 	let current_time = new Date().getTime() / 1000
 	if (current_time > jwt_exp) {
