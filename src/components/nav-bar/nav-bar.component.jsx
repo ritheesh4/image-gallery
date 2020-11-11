@@ -15,6 +15,10 @@ import MoreIcon from '@material-ui/icons/MoreVert'
 import Logo from '../../assets/logo.png'
 import './nav-bar.styles.scss'
 import AddPhoto from '../../components/modal-add-photo/modal-add-photo.component'
+import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { searchImage } from '../../redux/imagesReducer'
+import { loadImages } from '../../redux/imagesReducer'
 
 const useStyles = makeStyles((theme) => ({
 	appBarColor: { background: 'white', boxShadow: 'none' },
@@ -83,7 +87,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function PrimarySearchAppBar() {
+const PrimarySearchAppBar = (props) => {
+	const history = useHistory()
 	const classes = useStyles()
 	const [anchorEl, setAnchorEl] = React.useState(null)
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -108,6 +113,22 @@ export default function PrimarySearchAppBar() {
 		setMobileMoreAnchorEl(event.currentTarget)
 	}
 
+	const logoutAction = () => {
+		localStorage.removeItem('access_token')
+		localStorage.removeItem('refresh_token')
+		history.push('/login')
+	}
+
+	const [values, setValues] = React.useState({
+		name: '',
+	})
+	const handleChange = (name) => (event) => {
+		setValues({ ...values, [name]: event.target.value })
+		if (values.name.length) {
+			props.dispatch(searchImage(values.name))
+		} else props.dispatch(loadImages())
+	}
+
 	const menuId = 'primary-search-account-menu'
 	const renderMenu = (
 		<Menu
@@ -120,7 +141,7 @@ export default function PrimarySearchAppBar() {
 			onClose={handleMenuClose}
 		>
 			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+			<MenuItem onClick={logoutAction}>Logout</MenuItem>
 		</Menu>
 	)
 
@@ -184,6 +205,8 @@ export default function PrimarySearchAppBar() {
 								input: classes.inputInput,
 							}}
 							inputProps={{ 'aria-label': 'search' }}
+							value={values.name}
+							onChange={handleChange('name')}
 						/>
 					</div>
 					<div className={classes.grow} />
@@ -197,9 +220,9 @@ export default function PrimarySearchAppBar() {
 							aria-controls={menuId}
 							aria-haspopup='true'
 							onClick={handleProfileMenuOpen}
-							color='inherit'
+							// color='inherit'
 						>
-							{/* <AccountCircle /> */}
+							<AccountCircle />
 						</IconButton>
 					</div>
 					<div className={classes.sectionMobile}>
@@ -220,3 +243,7 @@ export default function PrimarySearchAppBar() {
 		</div>
 	)
 }
+
+const mapStateToProps = (state) => ({})
+
+export default connect(mapStateToProps)(PrimarySearchAppBar)

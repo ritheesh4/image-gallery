@@ -83,7 +83,7 @@ const SignUp = (props) => {
 						margin='normal'
 						required
 						fullWidth
-						id='email'
+						id='firstName'
 						label='First name'
 						name='firstName'
 						autoComplete='name'

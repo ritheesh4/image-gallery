@@ -29,10 +29,6 @@ class HomePage extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
-	// products: state.products.items,
-	// loading: state.products.loading,
-	// error: state.products.error,
-})
+const mapStateToProps = (state) => ({})
 
 export default connect(mapStateToProps)(HomePage)
