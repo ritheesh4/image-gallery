@@ -5,4 +5,9 @@
     grid-auto-rows: 40px;
   }
 
-  
+.cards-main-container{
+  display: none;
+  columns: 3 382px;
+  column-gap: 2.5rem;
+  text-align: center;
+}

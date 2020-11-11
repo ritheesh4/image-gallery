@@ -44,10 +44,13 @@ const DeletePhoto = (props) => {
 				onClose={handleClose}
 				aria-labelledby='form-dialog-title'
 			>
-				<DialogTitle id='form-dialog-title'>Are you sure?</DialogTitle>
+				<DialogTitle className='confirmation-message'>
+					Are you sure?
+				</DialogTitle>
 				<form>
 					<DialogContent>
-						<TextField
+						<div className='password-label'>Password</div>
+						<input
 							autoFocus
 							margin='dense'
 							id='password'
@@ -56,10 +59,12 @@ const DeletePhoto = (props) => {
 							fullWidth
 							value={values.password}
 							onChange={handleChange('password')}
+							className='password-delete'
+							placeholder='password'
 						/>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={handleClose} color='primary'>
+						<Button onClick={handleClose} color='#BDBDBD'>
 							Cancel
 						</Button>
 						<Button
@@ -68,7 +73,7 @@ const DeletePhoto = (props) => {
 							className='delete-button'
 							type='button'
 						>
-							Delete
+							<span className='delete-submit-text'>Delete</span>
 						</Button>
 					</DialogActions>
 				</form>

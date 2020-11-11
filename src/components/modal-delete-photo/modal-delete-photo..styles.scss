@@ -12,16 +12,18 @@
 
 .deleteButton{
   background-color:none;
+  color: white;
   width: 4rem;
   cursor: pointer;
   position: absolute;
   color:'red'!important;
-  border: 1px solid red;
+  border: 1px solid #EB5757;
+  ;
   border-radius: 1rem;
-  margin-left: 18%;
+  margin-left: 62%;
   margin-bottom: 7%;
-  margin-right: 2%;
-  margin-top: 1%;
+  margin-right: 1%;
+  margin-top: 3%;
   z-index: 1;
 }
 .deleteButton:hover{
@@ -32,4 +34,27 @@
   color: red;
   padding: 0 !important;
   margin: 0 !important;
+}
+
+.delete-submit-text{
+  color: white;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.confirmation-message{
+  text-align: left !important;
+}
+
+.password-delete{
+  border-bottom: inherit;
+  border: 1px solid black !important;
+  width: 98%;
+  height: 2rem;
+  border-radius: 0.5em;
+
+}
+
+.password-label{
+  text-align: left;
 }

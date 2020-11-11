@@ -198,7 +198,8 @@ const PrimarySearchAppBar = (props) => {
 						<div className={classes.searchIcon}>
 							<SearchIcon />
 						</div>
-						<InputBase
+						<input
+							className='search-input'
 							placeholder='Search by name'
 							classes={{
 								root: classes.inputRoot,
