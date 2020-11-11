@@ -56,7 +56,6 @@ const SignIn = (props) => {
 	if (localStorage.getItem('access_token')) {
 		const token = localStorage.getItem('access_token')
 		let decodedToken = jwt_decode(token)
-		console.log(decodedToken)
 		let jwt_exp = decodedToken.exp
 		let current_time = new Date().getTime() / 1000
 		if (current_time > jwt_exp) {

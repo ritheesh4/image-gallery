@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
+// import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -51,12 +51,9 @@ const DeletePhoto = (props) => {
 					<DialogContent>
 						<div className='password-label'>Password</div>
 						<input
-							autoFocus
-							margin='dense'
 							id='password'
 							label='password'
 							type='password'
-							fullWidth
 							value={values.password}
 							onChange={handleChange('password')}
 							className='password-delete'
@@ -64,8 +61,8 @@ const DeletePhoto = (props) => {
 						/>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={handleClose} color='#BDBDBD'>
-							Cancel
+						<Button onClick={handleClose}>
+							<span style={{ color: '#BDBDBD' }}>Cancel</span>
 						</Button>
 						<Button
 							onClick={submitData}

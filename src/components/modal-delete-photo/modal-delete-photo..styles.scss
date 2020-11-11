@@ -48,11 +48,15 @@
 
 .password-delete{
   border-bottom: inherit;
-  border: 1px solid black !important;
+  border: 1px solid #4F4F4F !important;
   width: 98%;
   height: 2rem;
   border-radius: 0.5em;
 
+}
+
+.password-delete:focus{
+  outline: none;
 }
 
 .password-label{
