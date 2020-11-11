@@ -65,10 +65,10 @@ const DeletePhoto = (props) => {
 						<Button
 							onClick={submitData}
 							color='primary'
-							className='submit-button'
+							className='delete-button'
 							type='button'
 						>
-							Submit
+							Delete
 						</Button>
 					</DialogActions>
 				</form>

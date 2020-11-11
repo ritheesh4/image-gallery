@@ -60,7 +60,7 @@ const SignUp = (props) => {
 	}
 
 	const submitData = (event) => {
-		// event.preventDefault()
+		event.preventDefault()
 		console.log(values)
 		// console.log(saveImage)
 		// values.dispatch(saveImage())
@@ -83,7 +83,7 @@ const SignUp = (props) => {
 						margin='normal'
 						required
 						fullWidth
-						id='email'
+						id='firstName'
 						label='First name'
 						name='firstName'
 						autoComplete='name'
