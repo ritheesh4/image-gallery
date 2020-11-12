@@ -56,7 +56,6 @@ const SignUp = (props) => {
 	})
 	const handleChange = (email) => (event) => {
 		setValues({ ...values, [email]: event.target.value })
-		// console.log(event.target.value)
 	}
 
 	const submitData = (event) => {

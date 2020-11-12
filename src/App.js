@@ -9,6 +9,7 @@ import jwt_decode from 'jwt-decode'
 let isAutheticated = false
 
 const checkAuth = () => {
+	console.log(process.env)
 	if (localStorage.getItem('access_token')) {
 		const token = localStorage.getItem('access_token')
 		let decodedToken = jwt_decode(token)

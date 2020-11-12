@@ -1,8 +1,7 @@
 import { SIGN_IN, SIGN_UP, signUp, signIn } from './login.actions'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
-
-const HOST_URL = 'http://localhost:8000'
+require('dotenv').config()
 
 const initialState = {
 	userName: null,
@@ -24,10 +23,13 @@ export const userAuthentication = (state = initialState, action) => {
 export const signInRequest = (user) => async (dispatch) => {
 	try {
 		axios
-			.post(`${HOST_URL}/auth/login`, {
-				email: user.email,
-				password: user.password,
-			})
+			.post(
+				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_LOGIN}`,
+				{
+					email: user.email,
+					password: user.password,
+				}
+			)
 			.then((res) => {
 				if (res.data.access_token) {
 					localStorage.setItem('access_token', res.data.access_token)
@@ -45,14 +47,16 @@ export const signInRefreshRequest = () => async (dispatch) => {
 	if (!tokenExpired) {
 		try {
 			axios
-				.post(`${HOST_URL}/auth/login`, {
-					headers: {
-						Authorization: localStorage.getItem('refresh_token'),
-					},
-					body: {},
-				})
+				.post(
+					`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_LOGIN}`,
+					{
+						headers: {
+							Authorization: localStorage.getItem('refresh_token'),
+						},
+						body: {},
+					}
+				)
 				.then((res) => {
-					console.log('respones of saved user', res.data.access_token)
 					if (res.data.access_token) {
 						localStorage.setItem('access_token', res.data.access_token)
 						localStorage.setItem('refresh_token', res.data.access_token)
@@ -66,15 +70,16 @@ export const signInRefreshRequest = () => async (dispatch) => {
 }
 
 export const signUpRequest = (user) => async (dispatch) => {
-	console.log('loaded')
 	try {
 		axios
-			.post(`${HOST_URL}/auth/register`, {
-				email: user.email,
-				password: user.password,
-			})
+			.post(
+				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_SIGNUP}`,
+				{
+					email: user.email,
+					password: user.password,
+				}
+			)
 			.then((res) => {
-				console.log('respones of saved user', res.data.access_token)
 				if (res.data.access_token) {
 					localStorage.setItem('access_token', res.data.access_token)
 					localStorage.setItem('refresh_token', res.data.access_token)
@@ -89,7 +94,6 @@ export const signUpRequest = (user) => async (dispatch) => {
 
 const checkTokenExpiry = (token) => {
 	let decodedToken = jwt_decode(token)
-	console.log(decodedToken)
 	let jwt_exp = decodedToken.exp
 	let current_time = new Date().getTime() / 1000
 	if (current_time > jwt_exp) {
@@ -105,11 +109,15 @@ export const logoutFunction = () => async () => {
 
 	try {
 		await axios
-			.post(`${HOST_URL}/logout`, body, {
-				headers: {
-					Authorization: `Bearer ${token} `,
-				},
-			})
+			.post(
+				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_LOGOUT}`,
+				body,
+				{
+					headers: {
+						Authorization: `Bearer ${token} `,
+					},
+				}
+			)
 			.then((res) => {
 				localStorage.removeItem('refresh_token')
 				localStorage.removeItem('access_token')

@@ -30,7 +30,6 @@ const DeletePhoto = (props) => {
 
 	const submitData = () => {
 		props.dispatch(deleteImage(values, props.id))
-		console.log(values, props.id)
 		handleClose()
 	}
 
