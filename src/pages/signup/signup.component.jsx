@@ -60,10 +60,6 @@ const SignUp = (props) => {
 	}
 
 	const submitData = (event) => {
-		event.preventDefault()
-		console.log(values)
-		// console.log(saveImage)
-		// values.dispatch(saveImage())
 		props.dispatch(signUpRequest(values))
 	}
 

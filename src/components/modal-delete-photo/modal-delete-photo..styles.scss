@@ -40,17 +40,20 @@
   color: red;
   padding: 0 !important;
   margin: 0 !important;
+  font-family: 'Noto Sans', sans-serif !important;
 }
 
 .delete-submit-text{
   color: white;
   padding: 0 !important;
   margin: 0 !important;
+  font-family: 'Noto Sans', sans-serif !important;
   
 }
 
 .confirmation-message{
   text-align: left !important;
+  font-family: 'Noto Sans', sans-serif !important;
 }
 
 .password-delete{
@@ -60,6 +63,7 @@
   height: 2rem;
   border-radius: 0.5em;
   padding-left: 8px;
+  font-family: 'Noto Sans', sans-serif !important;
 }
 
 .password-delete:focus{
@@ -71,4 +75,5 @@
   font-weight: 400 !important;
   font-size: 0.8rem;
   padding-bottom: 10px;
+  font-family: 'Noto Sans', sans-serif !important;
 }

@@ -63,7 +63,15 @@ const DeletePhoto = (props) => {
 					<DialogActions>
 						<Button onClick={handleClose}>
 							<span style={{ color: '#BDBDBD' }}>
-								C<span style={{ textTransform: 'lowercase' }}>ancel</span>
+								C
+								<span
+									style={{
+										textTransform: 'lowercase',
+										fontFamily: "'Noto Sans', sans-serif !important",
+									}}
+								>
+									ancel
+								</span>
 							</span>
 						</Button>
 						<Button

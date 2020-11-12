@@ -98,3 +98,21 @@ const checkTokenExpiry = (token) => {
 		return false
 	}
 }
+
+export const logoutFunction = () => async () => {
+	const body = {}
+	const token = localStorage.getItem('access_token')
+
+	try {
+		await axios
+			.post(`${HOST_URL}/logout`, body, {
+				headers: {
+					Authorization: `Bearer ${token} `,
+				},
+			})
+			.then((res) => {
+				localStorage.removeItem('refresh_token')
+				localStorage.removeItem('access_token')
+			})
+	} catch {}
+}

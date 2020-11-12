@@ -19,6 +19,7 @@ import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { searchImage } from '../../redux/imagesReducer'
 import { loadImages } from '../../redux/imagesReducer'
+import { logoutFunction } from '../../redux/loginReducer'
 
 const useStyles = makeStyles((theme) => ({
 	appBarColor: { background: 'white', boxShadow: 'none' },
@@ -117,6 +118,7 @@ const PrimarySearchAppBar = (props) => {
 		localStorage.removeItem('access_token')
 		localStorage.removeItem('refresh_token')
 		history.push('/login')
+		props.dispatch(logoutFunction())
 	}
 
 	const [values, setValues] = React.useState({
@@ -189,7 +191,11 @@ const PrimarySearchAppBar = (props) => {
 
 	return (
 		<div className={classes.grow}>
-			<AppBar position='static' className={classes.appBarColor}>
+			<AppBar
+				position='static'
+				className={classes.appBarColor}
+				style={{ fontFamily: " 'Noto Sans', sans-serif !important" }}
+			>
 				<Toolbar>
 					<Typography className={classes.title} variant='h6' noWrap>
 						<img src={Logo} className='logo' alt='logo' />
