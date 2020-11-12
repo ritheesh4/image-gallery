@@ -67,18 +67,39 @@ export const loadImages = () => async (dispatch) => {
 	}
 }
 
-export const searchImage = (seachWord) => async (dispatch) => {
+export const searchImage = (searchWord) => async (dispatch) => {
+	// try {
+	// 	const token = localStorage.getItem('access_token')
+	// 	const images = await axios.get(
+	// 		`${process.env.REACT_APP_HOST_URL}/images?q=${seachWord}`,
+	// 		{
+	// 			headers: {
+	// 				Authorization: `Bearer ${token} `,
+	// 			},
+	// 		}
+	// 	)
+	// 	dispatch(fetchImages(images.data))
+	// } catch (err) {
+	// 	// Handle Error Here
+	// 	console.error(err)
+	// }
+
+	console.log(searchWord)
+
 	try {
 		const token = localStorage.getItem('access_token')
 		const images = await axios.get(
-			`${process.env.REACT_APP_HOST_URL}/images?q=${seachWord}`,
+			`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_IMAGES}`,
 			{
 				headers: {
 					Authorization: `Bearer ${token} `,
 				},
 			}
 		)
-		dispatch(fetchImages(images.data))
+		let filteredData = images.data.filter((obj) =>
+			obj.name.toLowerCase().includes(searchWord.toLowerCase())
+		)
+		dispatch(fetchImages(filteredData))
 	} catch (err) {
 		// Handle Error Here
 		console.error(err)
