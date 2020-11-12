@@ -5,9 +5,15 @@
 }
 
 .delete-button{
-    padding: 1em !important;
+    padding: 2em;
+    padding-top: 0.6em !important;
+    padding-bottom: 0.6em !important;
+    padding-left: 1em !important;
+    padding-right: 1em !important;
     background-color: red !important;
     border-radius: 2em !important;
+    color: white !important;
+
 }
 
 .deleteButton{
@@ -40,6 +46,7 @@
   color: white;
   padding: 0 !important;
   margin: 0 !important;
+  
 }
 
 .confirmation-message{
@@ -52,7 +59,7 @@
   width: 98%;
   height: 2rem;
   border-radius: 0.5em;
-
+  padding-left: 8px;
 }
 
 .password-delete:focus{
@@ -61,4 +68,7 @@
 
 .password-label{
   text-align: left;
+  font-weight: 400 !important;
+  font-size: 0.8rem;
+  padding-bottom: 10px;
 }

@@ -1,16 +1,60 @@
 .MuiDialog-paperWidthSm {
   max-width: 600px;
   min-width: 438px !important;
+  border-radius: 0.6rem !important;
+
 
 }
 
+.MuiDialog{
+  display: none !important;
+}
+
 .submit-button{
-    padding: 1em !important;
+    padding: 2em;
+    padding-top: 0.6em !important;
+    padding-bottom: 0.6em !important;
+    padding-left: 1em !important;
+    padding-right: 1em !important;
     background-color: #3DB46D !important;
     border-radius: 2em !important;
+    color: white !important;
 }
 
 .addPhotoBtn{
   padding: 0.8rem;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input-section{
+  border-bottom: inherit;
+  border: 1px solid #4F4F4F;
+  width: 98%;
+  height: 2rem;
+  border-radius: 0.5em;
+  padding-left: 8px;
+  color: #BDBDBD;
+  ;
+}
+
+.input-label{
+  text-align: left;
+  font-size: 0.8rem !important;
+  padding-bottom: 5px;
+}
+
+.input-section:focus{
+  outline: none;
+}
+
+.add-photo-title{
+  text-align: left;
+}
+
+.cancel-btn{
+  color: #BDBDBD !important; 
+}
+
+.modal-body{
+  padding-bottom: 10rem;
 }

@@ -62,7 +62,9 @@ const DeletePhoto = (props) => {
 					</DialogContent>
 					<DialogActions>
 						<Button onClick={handleClose}>
-							<span style={{ color: '#BDBDBD' }}>Cancel</span>
+							<span style={{ color: '#BDBDBD' }}>
+								C<span style={{ textTransform: 'lowercase' }}>ancel</span>
+							</span>
 						</Button>
 						<Button
 							onClick={submitData}
@@ -70,7 +72,9 @@ const DeletePhoto = (props) => {
 							className='delete-button'
 							type='button'
 						>
-							<span className='delete-submit-text'>Delete</span>
+							<span className='delete-submit-text'>
+								D<span style={{ textTransform: 'lowercase' }}>elete</span>
+							</span>
 						</Button>
 					</DialogActions>
 				</form>
