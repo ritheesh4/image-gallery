@@ -56,6 +56,7 @@ export const loadImages = () => async (dispatch) => {
 			`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_IMAGES}`,
 			{
 				headers: {
+					'Content-Type': 'application/json',
 					Authorization: `Bearer ${token} `,
 				},
 			}
@@ -83,8 +84,6 @@ export const searchImage = (searchWord) => async (dispatch) => {
 	// 	// Handle Error Here
 	// 	console.error(err)
 	// }
-
-	console.log(searchWord)
 
 	try {
 		const token = localStorage.getItem('access_token')
@@ -114,12 +113,12 @@ export const deleteImage = (password, id) => async (dispatch) => {
 			.post(
 				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_LOGIN}`,
 				{
-					email: userName,
+					username: userName,
 					password: password.password,
 				}
 			)
 			.then((res) => {
-				if (res.data.access_token) {
+				if (res.data.acces_token) {
 					// dispatch(signIn(decodedToken)
 					dispatch(deleteImageRequest(id))
 				} else {
@@ -134,7 +133,8 @@ const deleteImageRequest = (id) => (dispatch) => {
 	try {
 		axios
 			.delete(
-				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_DELETE}/${id}`,
+				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_DELETE}/${id}/`,
+				null,
 				{
 					headers: {
 						Authorization: `Bearer ${token} `,
@@ -149,6 +149,6 @@ const deleteImageRequest = (id) => (dispatch) => {
 
 const getUserName = () => {
 	let decodedToken = jwt_decode(localStorage.getItem('access_token'))
-	const userName = decodedToken.email
+	const userName = decodedToken.username
 	return userName
 }

@@ -24,8 +24,8 @@ class CardContainer extends React.Component {
 					? this.props.images.map((item) => (
 							<Card
 								id={item.id}
-								image={item.img}
-								name={item.name}
+								image={item.imagename}
+								name={item.label}
 								key={item.id}
 							/>
 					  ))

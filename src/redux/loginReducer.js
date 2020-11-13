@@ -31,10 +31,11 @@ export const signInRequest = (user) => async (dispatch) => {
 				}
 			)
 			.then((res) => {
-				if (res.data.access_token) {
-					localStorage.setItem('access_token', res.data.access_token)
+				console.log(res.data.acces_token)
+				if (res.data.acces_token) {
+					localStorage.setItem('access_token', res.data.acces_token)
 					localStorage.setItem('refresh_token', res.data.refresh_token)
-					let decodedToken = jwt_decode(res.data.access_token)
+					let decodedToken = jwt_decode(res.data.acces_token)
 					dispatch(signIn(decodedToken))
 				}
 			})
@@ -57,8 +58,8 @@ export const signInRefreshRequest = () => async (dispatch) => {
 					}
 				)
 				.then((res) => {
-					if (res.data.access_token) {
-						localStorage.setItem('access_token', res.data.access_token)
+					if (res.data.acces_token) {
+						localStorage.setItem('access_token', res.data.acces_token)
 						localStorage.setItem('refresh_token', res.data.refresh_token)
 					}
 				})
@@ -80,10 +81,10 @@ export const signUpRequest = (user) => async (dispatch) => {
 				}
 			)
 			.then((res) => {
-				if (res.data.access_token) {
-					localStorage.setItem('access_token', res.data.access_token)
+				if (res.data.acces_token) {
+					localStorage.setItem('access_token', res.data.acces_token)
 					localStorage.setItem('refresh_token', res.data.refresh_token)
-					dispatch(signUp(res.data.access_token))
+					dispatch(signUp(res.data.acces_token))
 				}
 			})
 	} catch (err) {
@@ -103,18 +104,16 @@ const checkTokenExpiry = (token) => {
 	}
 }
 
-export const logoutFunction = () => async () => {
-	const body = {}
-	const token = localStorage.getItem('access_token')
-
+export const logoutFunction = (token) => async () => {
 	try {
+		// const token = localStorage.getItem('access_token')
 		await axios
 			.post(
 				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_LOGOUT}`,
-				body,
+				null,
 				{
 					headers: {
-						Authorization: `Bearer ${token} `,
+						Authorization: `Bearer ${token}`,
 					},
 				}
 			)

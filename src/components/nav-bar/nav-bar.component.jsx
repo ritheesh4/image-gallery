@@ -115,10 +115,11 @@ const PrimarySearchAppBar = (props) => {
 	}
 
 	const logoutAction = () => {
+		const token = localStorage.getItem('access_token')
 		localStorage.removeItem('access_token')
 		localStorage.removeItem('refresh_token')
 		history.push('/login')
-		props.dispatch(logoutFunction())
+		props.dispatch(logoutFunction(token))
 	}
 
 	const [values, setValues] = React.useState({
