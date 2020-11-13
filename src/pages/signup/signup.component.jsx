@@ -59,6 +59,7 @@ const SignUp = (props) => {
 	}
 
 	const submitData = (event) => {
+		event.preventDefault()
 		props.dispatch(signUpRequest(values))
 	}
 

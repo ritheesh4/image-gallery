@@ -74,6 +74,7 @@ const SignIn = (props) => {
 	}
 
 	const submitData = (event) => {
+		event.preventDefault()
 		props.dispatch(signInRequest(values))
 	}
 

@@ -26,14 +26,14 @@ export const signInRequest = (user) => async (dispatch) => {
 			.post(
 				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_LOGIN}`,
 				{
-					email: user.email,
+					username: user.email,
 					password: user.password,
 				}
 			)
 			.then((res) => {
 				if (res.data.access_token) {
 					localStorage.setItem('access_token', res.data.access_token)
-					localStorage.setItem('refresh_token', res.data.access_token)
+					localStorage.setItem('refresh_token', res.data.refresh_token)
 					let decodedToken = jwt_decode(res.data.access_token)
 					dispatch(signIn(decodedToken))
 				}
@@ -59,7 +59,7 @@ export const signInRefreshRequest = () => async (dispatch) => {
 				.then((res) => {
 					if (res.data.access_token) {
 						localStorage.setItem('access_token', res.data.access_token)
-						localStorage.setItem('refresh_token', res.data.access_token)
+						localStorage.setItem('refresh_token', res.data.refresh_token)
 					}
 				})
 		} catch {}
@@ -75,14 +75,14 @@ export const signUpRequest = (user) => async (dispatch) => {
 			.post(
 				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_SIGNUP}`,
 				{
-					email: user.email,
+					username: user.email,
 					password: user.password,
 				}
 			)
 			.then((res) => {
 				if (res.data.access_token) {
 					localStorage.setItem('access_token', res.data.access_token)
-					localStorage.setItem('refresh_token', res.data.access_token)
+					localStorage.setItem('refresh_token', res.data.refresh_token)
 					dispatch(signUp(res.data.access_token))
 				}
 			})
