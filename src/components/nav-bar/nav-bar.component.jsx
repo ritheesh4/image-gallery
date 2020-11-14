@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import InputBase from '@material-ui/core/InputBase'
+// import InputBase from '@material-ui/core/InputBase'
 import Badge from '@material-ui/core/Badge'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
@@ -19,6 +19,7 @@ import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { searchImage } from '../../redux/imagesReducer'
 import { loadImages } from '../../redux/imagesReducer'
+import { logoutFunction } from '../../redux/loginReducer'
 
 const useStyles = makeStyles((theme) => ({
 	appBarColor: { background: 'white', boxShadow: 'none' },
@@ -114,9 +115,11 @@ const PrimarySearchAppBar = (props) => {
 	}
 
 	const logoutAction = () => {
+		const token = localStorage.getItem('access_token')
 		localStorage.removeItem('access_token')
 		localStorage.removeItem('refresh_token')
 		history.push('/login')
+		props.dispatch(logoutFunction(token))
 	}
 
 	const [values, setValues] = React.useState({
@@ -189,7 +192,11 @@ const PrimarySearchAppBar = (props) => {
 
 	return (
 		<div className={classes.grow}>
-			<AppBar position='static' className={classes.appBarColor}>
+			<AppBar
+				position='static'
+				className={classes.appBarColor}
+				style={{ fontFamily: " 'Noto Sans', sans-serif !important" }}
+			>
 				<Toolbar>
 					<Typography className={classes.title} variant='h6' noWrap>
 						<img src={Logo} className='logo' alt='logo' />
@@ -198,13 +205,13 @@ const PrimarySearchAppBar = (props) => {
 						<div className={classes.searchIcon}>
 							<SearchIcon />
 						</div>
-						<InputBase
+						<input
+							className='search-input'
 							placeholder='Search by name'
 							classes={{
 								root: classes.inputRoot,
 								input: classes.inputInput,
 							}}
-							inputProps={{ 'aria-label': 'search' }}
 							value={values.name}
 							onChange={handleChange('name')}
 						/>

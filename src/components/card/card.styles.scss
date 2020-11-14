@@ -137,3 +137,73 @@ a.lightbox-close:after {
 .card-section{
 height: 100%;
 }
+
+.card-body {
+  position: relative;
+  overflow: hidden;
+  max-width: 382px;
+  // max-width: 30rem;
+  margin: 2rem;
+  // margin: auto;
+  display: inline-block;
+  transition: all 1s cubic-bezier(0.42, 0, 0.58, 1.0);
+  cursor: pointer;
+  margin-bottom: 60px;
+  opacity: 1; 
+}
+
+
+.deleteBtn{
+  display:none;
+}
+
+.card-body:hover .deleteBtn{
+  display: block;
+}
+
+
+.card-body:hover .card-image{
+  opacity: 0.4;
+  transition: all 1s cubic-bezier(0.42, 0, 0.58, 1.0);
+}
+
+
+.card-image {
+  opacity: 1;
+  width: 100%;
+  max-height: 582px;
+  border-radius: 24px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.img-container{
+  width: 100%;
+  max-height: 582px;
+  border-radius: 24px;
+  background-color: black;
+}
+
+.imageDescription {
+  opacity: 1 !important;
+  display: none;
+  position: absolute;
+  // margin-left: 5%;
+  // margin-bottom: 5%;
+  // margin-right: 5%;
+  // margin-top: 10%;
+  top: 70%;
+  padding-left: 5%;
+  text-align: left;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  color: white;
+  width: 90%,
+}
+
+.card-body:hover .imageDescription{
+  display: block;
+}

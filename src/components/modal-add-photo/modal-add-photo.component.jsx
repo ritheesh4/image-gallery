@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
+// import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -43,36 +43,45 @@ const AddPhoto = (props) => {
 				open={open}
 				onClose={handleClose}
 				aria-labelledby='form-dialog-title'
+				className='modal-body'
 			>
-				<DialogTitle id='form-dialog-title'>Add a new photo</DialogTitle>
+				<DialogTitle id='form-dialog-title' className='add-photo-title'>
+					Add a new photo
+				</DialogTitle>
 				<form>
 					<DialogContent>
-						<TextField
+						<div className='input-label'>Label</div>
+						<input
 							autoFocus
 							margin='dense'
 							id='name'
 							label='name'
 							type='label'
-							fullWidth
 							value={values.name}
 							onChange={handleChange('name')}
+							className='input-section'
+							placeholder='label'
 						/>
 					</DialogContent>
 					<DialogContent>
-						<TextField
+						<div className='input-label'>Photo</div>
+						<input
 							autoFocus
 							margin='dense'
 							id='image'
 							label='Photo URL'
 							type='url'
-							fullWidth
 							value={values.img}
 							onChange={handleChange('img')}
+							className='input-section'
+							placeholder='Photo'
 						/>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={handleClose} color='primary'>
-							Cancel
+						<Button onClick={handleClose}>
+							<span className='cancel-btn'>
+								C<span style={{ textTransform: 'lowercase' }}>ancel</span>
+							</span>
 						</Button>
 						<Button
 							onClick={submitData}
@@ -80,7 +89,7 @@ const AddPhoto = (props) => {
 							className='submit-button'
 							type='button'
 						>
-							Submit
+							S<span style={{ textTransform: 'lowercase' }}>ubmit</span>
 						</Button>
 					</DialogActions>
 				</form>

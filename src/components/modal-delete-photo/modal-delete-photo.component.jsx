@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
+// import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -30,7 +30,6 @@ const DeletePhoto = (props) => {
 
 	const submitData = () => {
 		props.dispatch(deleteImage(values, props.id))
-		console.log(values, props.id)
 		handleClose()
 	}
 
@@ -44,23 +43,35 @@ const DeletePhoto = (props) => {
 				onClose={handleClose}
 				aria-labelledby='form-dialog-title'
 			>
-				<DialogTitle id='form-dialog-title'>Are you sure?</DialogTitle>
+				<DialogTitle className='confirmation-message'>
+					Are you sure?
+				</DialogTitle>
 				<form>
 					<DialogContent>
-						<TextField
-							autoFocus
-							margin='dense'
+						<div className='password-label'>Password</div>
+						<input
 							id='password'
 							label='password'
 							type='password'
-							fullWidth
 							value={values.password}
 							onChange={handleChange('password')}
+							className='password-delete'
+							placeholder='password'
 						/>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={handleClose} color='primary'>
-							Cancel
+						<Button onClick={handleClose}>
+							<span style={{ color: '#BDBDBD' }}>
+								C
+								<span
+									style={{
+										textTransform: 'lowercase',
+										fontFamily: "'Noto Sans', sans-serif !important",
+									}}
+								>
+									ancel
+								</span>
+							</span>
 						</Button>
 						<Button
 							onClick={submitData}
@@ -68,7 +79,9 @@ const DeletePhoto = (props) => {
 							className='delete-button'
 							type='button'
 						>
-							Delete
+							<span className='delete-submit-text'>
+								D<span style={{ textTransform: 'lowercase' }}>elete</span>
+							</span>
 						</Button>
 					</DialogActions>
 				</form>

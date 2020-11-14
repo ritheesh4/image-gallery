@@ -1,8 +1,7 @@
 import { ADD_IMAGE, fetchImages, LOAD_IMAGES, SELECT_IMAGE } from './actions'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
-
-const HOST_URL = 'http://localhost:8000'
+require('dotenv').config()
 
 const initialState = {
 	images: [],
@@ -35,11 +34,15 @@ export const saveImage = (image) => async (dispatch) => {
 
 	try {
 		await axios
-			.post(`${HOST_URL}/images`, body, {
-				headers: {
-					Authorization: `Bearer ${token} `,
-				},
-			})
+			.post(
+				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_SAVE}`,
+				body,
+				{
+					headers: {
+						Authorization: `Bearer ${token} `,
+					},
+				}
+			)
 			.then((res) => {
 				dispatch(loadImages())
 			})
@@ -49,11 +52,15 @@ export const saveImage = (image) => async (dispatch) => {
 export const loadImages = () => async (dispatch) => {
 	try {
 		const token = localStorage.getItem('access_token')
-		const images = await axios.get(`${HOST_URL}/images`, {
-			headers: {
-				Authorization: `Bearer ${token} `,
-			},
-		})
+		const images = await axios.get(
+			`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_IMAGES}`,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token} `,
+				},
+			}
+		)
 		dispatch(fetchImages(images.data))
 	} catch (err) {
 		// Handle Error Here
@@ -61,15 +68,37 @@ export const loadImages = () => async (dispatch) => {
 	}
 }
 
-export const searchImage = (seachWord) => async (dispatch) => {
+export const searchImage = (searchWord) => async (dispatch) => {
+	// try {
+	// 	const token = localStorage.getItem('access_token')
+	// 	const images = await axios.get(
+	// 		`${process.env.REACT_APP_HOST_URL}/images?q=${seachWord}`,
+	// 		{
+	// 			headers: {
+	// 				Authorization: `Bearer ${token} `,
+	// 			},
+	// 		}
+	// 	)
+	// 	dispatch(fetchImages(images.data))
+	// } catch (err) {
+	// 	// Handle Error Here
+	// 	console.error(err)
+	// }
+
 	try {
 		const token = localStorage.getItem('access_token')
-		const images = await axios.get(`${HOST_URL}/images?q=${seachWord}`, {
-			headers: {
-				Authorization: `Bearer ${token} `,
-			},
-		})
-		dispatch(fetchImages(images.data))
+		const images = await axios.get(
+			`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_IMAGES}`,
+			{
+				headers: {
+					Authorization: `Bearer ${token} `,
+				},
+			}
+		)
+		let filteredData = images.data.filter((obj) =>
+			obj.name.toLowerCase().includes(searchWord.toLowerCase())
+		)
+		dispatch(fetchImages(filteredData))
 	} catch (err) {
 		// Handle Error Here
 		console.error(err)
@@ -81,14 +110,16 @@ export const deleteImage = (password, id) => async (dispatch) => {
 
 	try {
 		axios
-			.post(`${HOST_URL}/auth/login`, {
-				email: userName,
-				password: password.password,
-			})
+			.post(
+				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_LOGIN}`,
+				{
+					username: userName,
+					password: password.password,
+				}
+			)
 			.then((res) => {
-				if (res.data.access_token) {
-					// dispatch(signIn(decodedToken))
-					console.log('delete executing')
+				if (res.data.acces_token) {
+					// dispatch(signIn(decodedToken)
 					dispatch(deleteImageRequest(id))
 				} else {
 					alert('wrong password')
@@ -101,11 +132,15 @@ const deleteImageRequest = (id) => (dispatch) => {
 	const token = localStorage.getItem('access_token')
 	try {
 		axios
-			.delete(`${HOST_URL}/images/${id}`, {
-				headers: {
-					Authorization: `Bearer ${token} `,
-				},
-			})
+			.delete(
+				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_DELETE}/${id}/`,
+				null,
+				{
+					headers: {
+						Authorization: `Bearer ${token} `,
+					},
+				}
+			)
 			.then((res) => {
 				dispatch(loadImages())
 			})
@@ -114,7 +149,6 @@ const deleteImageRequest = (id) => (dispatch) => {
 
 const getUserName = () => {
 	let decodedToken = jwt_decode(localStorage.getItem('access_token'))
-	// console.log(decodedToken)
-	const userName = decodedToken.email
+	const userName = decodedToken.username
 	return userName
 }

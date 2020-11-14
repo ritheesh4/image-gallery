@@ -56,14 +56,10 @@ const SignUp = (props) => {
 	})
 	const handleChange = (email) => (event) => {
 		setValues({ ...values, [email]: event.target.value })
-		// console.log(event.target.value)
 	}
 
 	const submitData = (event) => {
 		event.preventDefault()
-		console.log(values)
-		// console.log(saveImage)
-		// values.dispatch(saveImage())
 		props.dispatch(signUpRequest(values))
 	}
 

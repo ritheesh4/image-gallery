@@ -1,6 +1,6 @@
 import React from 'react'
 // import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
+// import Grid from '@material-ui/core/Grid'
 import Card from '../card/card.component'
 import { connect } from 'react-redux' /* code change */
 // const useStyles = makeStyles((theme) => ({
@@ -19,30 +19,18 @@ class CardContainer extends React.Component {
 
 	render() {
 		return (
-			<Grid
-				container
-				direction='row'
-				justify='center'
-				alignItems='center'
-				spacing={3}
-				style={{
-					width: '95vw',
-					margin: 'auto',
-					minHeight: '83.4vh',
-					// paddingTop: '5rem',
-				}}
-			>
+			<div className='cards-main-container'>
 				{this.props.images
 					? this.props.images.map((item) => (
 							<Card
 								id={item.id}
-								image={item.img}
-								name={item.name}
+								image={item.imagename}
+								name={item.label}
 								key={item.id}
 							/>
 					  ))
 					: ''}
-			</Grid>
+			</div>
 		)
 	}
 }
