@@ -59,7 +59,7 @@ const SignIn = (props) => {
 		let jwt_exp = decodedToken.exp
 		let current_time = new Date().getTime() / 1000
 		if (current_time > jwt_exp) {
-			props.dispatch(signInRefreshRequest())
+			props.dispatch(signInRefreshRequest)
 		} else {
 			history.push('/home')
 		}

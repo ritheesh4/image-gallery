@@ -131,19 +131,26 @@ export const deleteImage = (password, id) => async (dispatch) => {
 const deleteImageRequest = (id) => (dispatch) => {
 	const token = localStorage.getItem('access_token')
 	try {
-		axios
-			.delete(
-				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_DELETE}/${id}/`,
-				null,
-				{
-					headers: {
-						Authorization: `Bearer ${token} `,
-					},
-				}
-			)
-			.then((res) => {
-				dispatch(loadImages())
-			})
+		// axios
+		// 	.delete(
+		// 		`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_DELETE}/${id}/`,
+		// 		null,
+		// 		{
+		// 			headers: {
+		// 				Authorization: `Bearer ${token} `,
+		// 			},
+		// 		}
+		// 	)
+		// 	.then((res) => {
+		// 		dispatch(loadImages())
+		// 	})
+		axios({
+			method: 'delete',
+			url: `${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_DELETE}/${id}`,
+			headers: { Authorization: `Bearer ${token} ` },
+		}).then((res) => {
+			dispatch(loadImages())
+		})
 	} catch {}
 }
 
