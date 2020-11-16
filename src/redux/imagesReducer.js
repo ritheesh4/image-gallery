@@ -25,20 +25,18 @@ export const imagesReducer = (state = initialState, action) => {
 	}
 }
 
-export const saveImage = (image) => async (dispatch) => {
-	const body = {
-		name: image.name,
-		img: image.img,
-	}
+export const saveImage = (imageData) => async (dispatch) => {
 	const token = localStorage.getItem('access_token')
+	console.log(imageData)
 
 	try {
 		await axios
 			.post(
 				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_SAVE}`,
-				body,
+				imageData,
 				{
 					headers: {
+						'Content-Type': 'multipart/form-data',
 						Authorization: `Bearer ${token} `,
 					},
 				}
@@ -69,6 +67,7 @@ export const loadImages = () => async (dispatch) => {
 }
 
 export const searchImage = (searchWord) => async (dispatch) => {
+	console.log(searchWord)
 	// try {
 	// 	const token = localStorage.getItem('access_token')
 	// 	const images = await axios.get(
@@ -96,7 +95,7 @@ export const searchImage = (searchWord) => async (dispatch) => {
 			}
 		)
 		let filteredData = images.data.filter((obj) =>
-			obj.name.toLowerCase().includes(searchWord.toLowerCase())
+			obj.label.toLowerCase().includes(searchWord.toLowerCase())
 		)
 		dispatch(fetchImages(filteredData))
 	} catch (err) {
@@ -131,19 +130,13 @@ export const deleteImage = (password, id) => async (dispatch) => {
 const deleteImageRequest = (id) => (dispatch) => {
 	const token = localStorage.getItem('access_token')
 	try {
-		axios
-			.delete(
-				`${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_DELETE}/${id}/`,
-				null,
-				{
-					headers: {
-						Authorization: `Bearer ${token} `,
-					},
-				}
-			)
-			.then((res) => {
-				dispatch(loadImages())
-			})
+		axios({
+			method: 'delete',
+			url: `${process.env.REACT_APP_HOST_URL}/${process.env.REACT_APP_PATH_DELETE}/${id}`,
+			headers: { Authorization: `Bearer ${token} ` },
+		}).then((res) => {
+			dispatch(loadImages())
+		})
 	} catch {}
 }
 

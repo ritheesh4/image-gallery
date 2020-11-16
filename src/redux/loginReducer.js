@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_UP, signUp, signIn } from './login.actions'
+import { SIGN_IN, SIGN_UP, signUp } from './login.actions'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 require('dotenv').config()
@@ -31,12 +31,12 @@ export const signInRequest = (user) => async (dispatch) => {
 				}
 			)
 			.then((res) => {
-				console.log(res.data.acces_token)
 				if (res.data.acces_token) {
 					localStorage.setItem('access_token', res.data.acces_token)
 					localStorage.setItem('refresh_token', res.data.refresh_token)
-					let decodedToken = jwt_decode(res.data.acces_token)
-					dispatch(signIn(decodedToken))
+					window.location.reload()
+					// let decodedToken = jwt_decode(res.data.acces_token)
+					// dispatch(signIn(decodedToken))
 				}
 			})
 	} catch {}

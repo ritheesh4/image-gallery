@@ -1,6 +1,5 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-// import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -29,8 +28,16 @@ const AddPhoto = (props) => {
 		setValues({ ...values, [name]: event.target.value })
 	}
 
-	const submitData = () => {
-		props.dispatch(saveImage(values))
+	const submitData = (e) => {
+		const url = document.getElementById('imageUrl')
+		if (values.name !== '' && url !== '') {
+			const file = url.files[0]
+			let imageData = new FormData()
+			imageData.append('label', values.name)
+			imageData.append('imagename', file, file.name)
+			props.dispatch(saveImage(imageData))
+		}
+
 		handleClose()
 	}
 
@@ -68,13 +75,14 @@ const AddPhoto = (props) => {
 						<input
 							autoFocus
 							margin='dense'
-							id='image'
+							id='imageUrl'
 							label='Photo URL'
-							type='url'
+							type='file'
 							value={values.img}
 							onChange={handleChange('img')}
-							className='input-section'
+							// className='input-section'
 							placeholder='Photo'
+							className='input-image'
 						/>
 					</DialogContent>
 					<DialogActions>
