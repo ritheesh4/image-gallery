@@ -1,6 +1,5 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-// import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -8,13 +7,6 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import './modal-add-photo.styles.scss'
 import { saveImage } from '../../redux/imagesReducer'
 import { connect } from 'react-redux'
-// import jwt_decode from 'jwt-decode'
-
-// const getUserName = () => {
-// 	let decodedToken = jwt_decode(localStorage.getItem('access_token'))
-// 	const userName = decodedToken.username
-// 	return userName
-// }
 
 const AddPhoto = (props) => {
 	const [open, setOpen] = React.useState(false)
@@ -36,7 +28,7 @@ const AddPhoto = (props) => {
 		setValues({ ...values, [name]: event.target.value })
 	}
 
-	const submitData = () => {
+	const submitData = (e) => {
 		const url = document.getElementById('imageUrl')
 		if (values.name !== '' && url !== '') {
 			const file = url.files[0]

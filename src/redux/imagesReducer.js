@@ -27,6 +27,7 @@ export const imagesReducer = (state = initialState, action) => {
 
 export const saveImage = (imageData) => async (dispatch) => {
 	const token = localStorage.getItem('access_token')
+	console.log(imageData)
 
 	try {
 		await axios
@@ -66,6 +67,7 @@ export const loadImages = () => async (dispatch) => {
 }
 
 export const searchImage = (searchWord) => async (dispatch) => {
+	console.log(searchWord)
 	// try {
 	// 	const token = localStorage.getItem('access_token')
 	// 	const images = await axios.get(
@@ -93,7 +95,7 @@ export const searchImage = (searchWord) => async (dispatch) => {
 			}
 		)
 		let filteredData = images.data.filter((obj) =>
-			obj.name.toLowerCase().includes(searchWord.toLowerCase())
+			obj.label.toLowerCase().includes(searchWord.toLowerCase())
 		)
 		dispatch(fetchImages(filteredData))
 	} catch (err) {
