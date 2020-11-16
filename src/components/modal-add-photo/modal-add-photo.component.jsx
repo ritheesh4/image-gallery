@@ -8,6 +8,13 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import './modal-add-photo.styles.scss'
 import { saveImage } from '../../redux/imagesReducer'
 import { connect } from 'react-redux'
+// import jwt_decode from 'jwt-decode'
+
+// const getUserName = () => {
+// 	let decodedToken = jwt_decode(localStorage.getItem('access_token'))
+// 	const userName = decodedToken.username
+// 	return userName
+// }
 
 const AddPhoto = (props) => {
 	const [open, setOpen] = React.useState(false)
@@ -30,7 +37,15 @@ const AddPhoto = (props) => {
 	}
 
 	const submitData = () => {
-		props.dispatch(saveImage(values))
+		const url = document.getElementById('imageUrl')
+		if (values.name !== '' && url !== '') {
+			const file = url.files[0]
+			let imageData = new FormData()
+			imageData.append('label', values.name)
+			imageData.append('imagename', file, file.name)
+			props.dispatch(saveImage(imageData))
+		}
+
 		handleClose()
 	}
 
@@ -68,13 +83,14 @@ const AddPhoto = (props) => {
 						<input
 							autoFocus
 							margin='dense'
-							id='image'
+							id='imageUrl'
 							label='Photo URL'
-							type='url'
+							type='file'
 							value={values.img}
 							onChange={handleChange('img')}
-							className='input-section'
+							// className='input-section'
 							placeholder='Photo'
+							className='input-image'
 						/>
 					</DialogContent>
 					<DialogActions>
